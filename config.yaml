@@ -1,0 +1,13 @@
+---
+tick_rate: 250
+
+layout:
+  - block:
+    app_name: "cpu"
+    size: 10
+  - block:
+    app_name: "cpu"
+    size: 90
+  - block:
+    app_name: "cpu"
+    size: 10

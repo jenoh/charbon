@@ -6,8 +6,15 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-tui = "0.19.0"
-serde = {version = "1.0.147", features = ["derive"] }
-toml = "0.5"
+# Config
+serde_yaml = "0.8"
 log = "0.4"
 env_logger = "0.10.0"
+
+crossterm = "0.25"
+tui = "0.19.0"
+serde = {version = "1.0.147", features = ["derive"] }
+
+# Mod
+rand = "0.8.5"
+sys-info = "0.9"
