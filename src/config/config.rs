@@ -12,6 +12,11 @@ pub struct Layout {
     app_name: String,
     size: u16,
 }
+#[derive(Default, Clone)]
+pub struct CustomLayout {
+    pub custom_constraints: Vec<Constraint>,
+    pub app_name: Vec<String>,
+}
 
 impl Config {
     /*
@@ -23,14 +28,19 @@ impl Config {
         self.set_config(serde_yaml::from_reader(f).expect("Could not read values."));
     }
     /*
-     * Converte layout size to Vec<Constraint>
+     * Converte layout size to CustomLayout
      */
-    pub fn get_contraints(&mut self) -> Vec<Constraint> {
-        let mut vec: Vec<Constraint> = Vec::new();
+    pub fn get_custom_layout(&mut self) -> CustomLayout {
+        let mut vec_constraint: Vec<Constraint> = Vec::new();
+        let mut vec_app_name: Vec<String> = Vec::new();
         for l in &self.layout {
-            vec.push(Constraint::Percentage(l.size))
+            vec_app_name.push(l.app_name.clone());
+            vec_constraint.push(Constraint::Percentage(l.size))
         }
-        return vec;
+        return CustomLayout {
+            app_name: vec_app_name,
+            custom_constraints: vec_constraint,
+        };
     }
     /*
      * Setters

@@ -12,6 +12,7 @@ use tui::{
 };
 
 use config::config::Config;
+use config::config::CustomLayout;
 
 mod config;
 
@@ -20,7 +21,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let mut config = Config::default();
     config.get_config();
     println!("{:?}", config);
-    let c = config.get_contraints();
+    let c = config.get_custom_layout();
     // setup terminal
     enable_raw_mode()?;
     let mut stdout = io::stdout();
@@ -46,7 +47,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
-fn run_app<B: Backend>(terminal: &mut Terminal<B>, c: Vec<Constraint>) -> io::Result<()> {
+fn run_app<B: Backend>(terminal: &mut Terminal<B>, c: CustomLayout) -> io::Result<()> {
     loop {
         terminal.draw(|f| ui(f, c.clone()))?;
         if let Event::Key(key) = event::read()? {
@@ -57,14 +58,13 @@ fn run_app<B: Backend>(terminal: &mut Terminal<B>, c: Vec<Constraint>) -> io::Re
     }
 }
 
-fn ui<B: Backend>(f: &mut Frame<B>, c: Vec<Constraint>) {
+fn ui<B: Backend>(f: &mut Frame<B>, c: CustomLayout) {
     let chunks = Layout::default()
         .direction(Direction::Vertical)
-        .constraints(c.as_ref())
+        .constraints(c.custom_constraints.as_ref())
         .split(f.size());
-
-    let block = Block::default().title("Block").borders(Borders::ALL);
-    f.render_widget(block, chunks[0]);
-    let block = Block::default().title("Block 2").borders(Borders::ALL);
-    f.render_widget(block, chunks[1]);
+    for (i, b) in c.app_name.iter().enumerate() {
+        let block = Block::default().title(b.clone()).borders(Borders::ALL);
+        f.render_widget(block, chunks[i]);
+    }
 }
