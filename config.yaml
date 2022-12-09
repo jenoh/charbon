@@ -4,10 +4,13 @@ tick_rate: 250
 layout:
   - block:
     app_name: "cpu"
+    size: 20
+  - block:
+    app_name: "system"
     size: 10
   - block:
-    app_name: "cpu"
-    size: 90
+    app_name: "memory"
+    size: 20
   - block:
-    app_name: "cpu"
-    size: 10
+    app_name: "ci"
+    size: 50
