@@ -1,10 +1,8 @@
 use sysinfo::{System, SystemExt};
 use tui::{
-    backend::Backend,
-    layout::{Constraint, Direction, Layout},
+    layout::Constraint,
     style::{Color, Style},
     widgets::{Block, Borders, Row, Table},
-    Frame,
 };
 
 #[derive(Default)]
@@ -16,7 +14,7 @@ pub struct SystemInfo {
 }
 
 impl SystemInfo {
-    pub fn get_system_info() -> Table<'static> {
+    pub fn render() -> Table<'static> {
         let mut sys = System::new_all();
         sys.refresh_all();
         let l = vec![SystemInfo {

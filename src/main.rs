@@ -5,7 +5,10 @@ use crossterm::{
 };
 use std::{error::Error, io};
 use tui::{backend::CrosstermBackend, Terminal};
-
+// Strum contains all the trait definitions
+extern crate strum;
+#[macro_use]
+extern crate strum_macros;
 use config::config::Config;
 mod app;
 mod config;
@@ -16,7 +19,6 @@ fn main() -> Result<(), Box<dyn Error>> {
     // get config
     let mut config = Config::default();
     config.get_config();
-    println!("{:?}", config);
     let c = config.get_custom_layout();
     // setup terminal
     enable_raw_mode()?;
