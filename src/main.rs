@@ -11,8 +11,8 @@ extern crate strum;
 extern crate strum_macros;
 use config::config::Config;
 mod app;
+mod blocks;
 mod config;
-mod features;
 mod ui;
 
 fn main() -> Result<(), Box<dyn Error>> {

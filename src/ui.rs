@@ -1,5 +1,5 @@
+use crate::blocks::blocks;
 use crate::config::config;
-use crate::features::features;
 
 use tui::{
     backend::Backend,
@@ -14,7 +14,7 @@ pub fn ui<B: Backend>(f: &mut Frame<B>, c: config::CustomLayout) {
         .split(f.size());
 
     for (i, b) in c.app_name.iter().enumerate() {
-        let feature: features::Features = b.parse().unwrap();
-        f.render_widget(features::select_feature(feature), chunks[i]);
+        let feature: blocks::Block = b.parse().unwrap();
+        f.render_widget(blocks::select_feature(feature), chunks[i]);
     }
 }
