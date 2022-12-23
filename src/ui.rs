@@ -1,4 +1,4 @@
-use crate::blocks::blocks;
+use crate::blocks;
 use crate::config::config;
 
 use tui::{
@@ -14,7 +14,13 @@ pub fn ui<B: Backend>(f: &mut Frame<B>, c: config::CustomLayout) {
         .split(f.size());
 
     for (i, b) in c.app_name.iter().enumerate() {
-        let feature: blocks::Block = b.parse().unwrap();
-        f.render_widget(blocks::select_feature(feature), chunks[i]);
+        match b.parse().unwrap() {
+            blocks::blocks::Block::System => {
+                f.render_widget(blocks::system_info::SystemInfo::render(), chunks[i])
+            }
+            blocks::blocks::Block::Memory => {
+                f.render_widget(blocks::memory::Memory::render(), chunks[i])
+            }
+        }
     }
 }
