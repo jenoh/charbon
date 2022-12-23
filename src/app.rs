@@ -4,9 +4,9 @@ use crossterm::event::{self, Event, KeyCode};
 use std::io;
 use tui::{backend::Backend, Terminal};
 
-pub fn run_app<B: Backend>(terminal: &mut Terminal<B>, c: config::CustomLayout) -> io::Result<()> {
+pub fn run_app<B: Backend>(terminal: &mut Terminal<B>, cl: config::CustomLayout) -> io::Result<()> {
     loop {
-        terminal.draw(|f| ui::ui(f, c.clone()))?;
+        terminal.draw(|f| ui::ui(f, cl.clone()))?;
         if let Event::Key(key) = event::read()? {
             if let KeyCode::Char('q') = key.code {
                 return Ok(());

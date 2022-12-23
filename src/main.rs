@@ -20,7 +20,8 @@ fn main() -> Result<(), Box<dyn Error>> {
     // get config
     let mut config = Config::default();
     config.get_config();
-    let c = config.get_custom_layout();
+    let cl = config.get_custom_layout();
+
     // setup terminal
     enable_raw_mode()?;
     let mut stdout = io::stdout();
@@ -29,7 +30,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let mut terminal = Terminal::new(backend)?;
 
     // create app and run it
-    let res = app::run_app(&mut terminal, c);
+    let res = app::run_app(&mut terminal, cl);
 
     // restore terminal
     disable_raw_mode()?;

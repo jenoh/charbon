@@ -37,10 +37,23 @@ impl Config {
             vec_app_name.push(l.app_name.clone());
             vec_constraint.push(Constraint::Percentage(l.size))
         }
+        if self.get_empty_space() != 0 {
+            vec_constraint.push(Constraint::Percentage(self.get_empty_space()))
+        }
         return CustomLayout {
             app_name: vec_app_name,
             custom_constraints: vec_constraint,
         };
+    }
+    /*
+     * Get empty space to create blank block
+     */
+    fn get_empty_space(&mut self) -> u16 {
+        let mut t: u16 = 0;
+        for l in &self.layout {
+            t += l.size;
+        }
+        return 100 - t;
     }
     /*
      * Setters

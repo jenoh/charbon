@@ -7,13 +7,13 @@ use tui::{
     Frame,
 };
 
-pub fn ui<B: Backend>(f: &mut Frame<B>, c: config::CustomLayout) {
+pub fn ui<B: Backend>(f: &mut Frame<B>, cl: config::CustomLayout) {
     let chunks = Layout::default()
         .direction(Direction::Vertical)
-        .constraints(c.custom_constraints.as_ref())
+        .constraints(cl.custom_constraints.as_ref())
         .split(f.size());
 
-    for (i, b) in c.app_name.iter().enumerate() {
+    for (i, b) in cl.app_name.iter().enumerate() {
         match b.parse().unwrap() {
             blocks::blocks::Block::System => {
                 f.render_widget(blocks::system_info::SystemInfo::render(), chunks[i])
