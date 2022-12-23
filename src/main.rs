@@ -9,6 +9,7 @@ use tui::{backend::CrosstermBackend, Terminal};
 extern crate strum;
 #[macro_use]
 extern crate strum_macros;
+extern crate sys_info;
 use config::config::Config;
 mod app;
 mod blocks;
