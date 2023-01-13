@@ -1,5 +1,5 @@
 # charbon 
-<em>It's far from the first release, please be kind with my code.</em>
+<em>It's a proof of concept</em>
 
 `charbon` is a modulable dashboard on your terminal made in [Rust](https://www.rust-lang.org). The main goal is to create an open-source dashboard with many modules to fit with all different developer needs.
 Running on `Linux` and `macOS`.
